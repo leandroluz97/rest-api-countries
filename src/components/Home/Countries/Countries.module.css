@@ -1,0 +1,11 @@
+.cards {
+}
+.card__container {
+  width: var(--screen-size);
+  margin: 0 auto;
+}
+.card__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 5%;
+}

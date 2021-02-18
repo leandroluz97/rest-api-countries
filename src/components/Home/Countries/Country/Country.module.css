@@ -1,0 +1,38 @@
+.card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.034);
+  margin: 1rem 0;
+  overflow: hidden;
+}
+.card__content {
+  padding: 3rem 2rem;
+}
+.card__title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  font-weight: 800;
+}
+.card__content p:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.card__population {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.card__region {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.card__capital {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.card__res {
+  font-weight: 400;
+}
+.card__flag {
+  height: 180px;
+  width: 285px;
+  object-fit: cover;
+}

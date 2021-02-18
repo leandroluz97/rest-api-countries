@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios"
+import React, { useState, useEffect } from "react"
+import "./App.css"
+import Axios from "./Utils/axios"
 
-function App() {
+import Spinner from "./components/UI/Spinner"
+import Header from "./components/Header/Header"
+
+import Home from "./components/Home/Home"
+
+const App = () => {
+  const [countries, setCountries] = useState()
+
+  //get all countries
+  useEffect(() => {
+    const axios = new Axios()
+    axios.getAllCountries().then((all) => {
+      setCountries(all.data)
+    }, [])
+  })
+
+  let allCountries = null
+
+  if (countries) {
+    allCountries = <Home countries={countries} />
+  } else {
+    allCountries = <Spinner />
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+
+      {allCountries}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

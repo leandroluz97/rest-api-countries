@@ -1,0 +1,9 @@
+.search__container {
+  max-width: var(--screen-size);
+  margin: 5rem auto;
+}
+.search__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
