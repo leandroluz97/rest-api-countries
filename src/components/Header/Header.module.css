@@ -3,17 +3,18 @@
   box-shadow: 0px 1px 5px 5px rgba(0, 0, 0, 0.034);
 }
 .header__container {
-  width: var(--screen-size);
+  max-width: var(--screen-size);
   margin: 0 auto;
 }
 .header__wrapper {
   display: flex;
   justify-content: space-between;
-  padding: 2rem 0;
+  padding: 3rem 0;
+  margin: 0 2rem;
 }
 .header__logo {
   font-weight: 900;
-  font-size: 2.4rem;
+  font-size: 1.4rem;
   text-decoration: none;
   color: black;
 }
@@ -24,5 +25,8 @@
 }
 .header__txt {
   padding-left: 1rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+}
+
+@media (min-width: 425px) {
 }

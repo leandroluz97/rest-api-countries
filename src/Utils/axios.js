@@ -12,6 +12,9 @@ class Axios {
   getAllCountries() {
     return this.instance.get("/all")
   }
+  getOne() {
+    return this.instance.get("/name/belgium")
+  }
 }
 
 export default Axios

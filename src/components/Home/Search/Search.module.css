@@ -3,7 +3,13 @@
   margin: 5rem auto;
 }
 .search__wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 0 2rem;
+}
+@media (min-width: 768px) {
+  .search__wrapper {
+    margin: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

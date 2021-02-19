@@ -6,6 +6,7 @@ const Home = (props) => {
   return (
     <section className={styles.home}>
       <Search />
+
       <Countries countries={props.countries} />
     </section>
   )

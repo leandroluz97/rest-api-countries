@@ -1,0 +1,129 @@
+.chosen__container {
+  max-width: var(--screen-size);
+  margin: 0 auto;
+}
+.chosen__wrapper {
+  margin: 5rem 2rem;
+}
+.chosen__contBtn {
+  margin: 5rem 2rem;
+}
+.chosen__contBtn a {
+  text-decoration: none;
+  padding: 1rem 3rem;
+  color: black;
+  font-weight: 500;
+  background-color: white;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.062);
+  border-radius: 2px;
+
+  font-size: 1.4rem;
+}
+.chosen__image {
+  overflow: hidden;
+  text-align: left;
+}
+.chosen__image img {
+  height: 230px;
+  width: 320px;
+  object-fit: fill;
+  border-radius: 5px;
+}
+.chosen__name {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 3rem 0;
+}
+.chosen__containerOne {
+  margin-bottom: 4rem;
+}
+.chosen__containerTwo {
+  margin-bottom: 4rem;
+}
+.chosen__dataText {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.chosen__dataText:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.chosen__dataText span {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.chosen__links {
+  text-align: center;
+}
+.chosen__link {
+  text-decoration: none;
+  padding: 1rem 3rem;
+  color: black;
+  font-weight: 500;
+  background-color: white;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.062);
+  border-radius: 2px;
+  margin-right: 1rem;
+}
+
+@media (min-width: 425px) {
+  .chosen__dataText {
+    text-align: center;
+  }
+  .chosen__image {
+    text-align: center;
+  }
+  .chosen__links {
+    text-align: center;
+  }
+  .chosen__name {
+    text-align: center;
+  }
+}
+@media (min-width: 1024px) {
+  .chosen__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .chosen__dataText {
+    text-align: left;
+  }
+  .chosen__image {
+    text-align: left;
+    width: 40%;
+    border-radius: 5px;
+    overflow: visible;
+  }
+  .chosen__image img {
+    text-align: left;
+    width: 460px;
+    height: 300px;
+    object-fit: fill;
+    border-radius: 5px;
+  }
+  .chosen__links {
+    text-align: left;
+  }
+  .chosen__name {
+    text-align: left;
+    margin-top: 0;
+  }
+  .chosen__containerOne {
+    margin-bottom: 5rem;
+    grid-column: 0/1;
+  }
+  .chosen__containerTwo {
+    margin-bottom: 0rem;
+    margin-top: 6rem;
+    grid-column: 2/3;
+  }
+  .chosen__containerThree {
+    margin-bottom: 0rem;
+    grid-column: 0/3;
+  }
+  .chosen__content {
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 2;
+    width: 45%;
+  }
+}
