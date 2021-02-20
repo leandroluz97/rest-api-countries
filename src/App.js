@@ -5,61 +5,56 @@ import Axios from "./Utils/axios"
 import Chosen from "./components/Chosen/Chosen"
 import Spinner from "./components/UI/Spinner"
 import Header from "./components/Header/Header"
-
 import Home from "./components/Home/Home"
+import { Switch, Route } from "react-router-dom"
 
 const App = () => {
   const [countries, setCountries] = useState()
-  const [chosenOne, setChoseOne] = useState()
 
   //get all countries
-  useEffect(() => {}, [])
+  useEffect(() => {
+    getAllCountry()
+  }, [])
 
   function getAllCountry() {
     const axios = new Axios()
     axios.getAllCountries().then((all) => {
-      setChoseOne(all.data)
-    })
-  }
-  function getOneCountry() {
-    const axios = new Axios()
-    axios.getOne().then((all) => {
-      //refactor data
-      let refactoredData
-      for (const key of all.data) {
-        refactoredData = key
-      }
-      for (const key in refactoredData) {
-        if (Array.isArray(refactoredData[key])) {
-          refactoredData[key] = { ...refactoredData[key] }
-        }
-      }
-
-      setChoseOne(refactoredData)
+      setCountries(all.data)
     })
   }
 
   let allCountries = null
   let country = null
-  /*
+
   if (countries) {
-    allCountries = <Chosen chosenOne={chosenOne} />
+    allCountries = <Home countries={countries} />
   } else {
     allCountries = <Spinner />
   }
-  */
-  if (chosenOne) {
-    country = <Chosen country={chosenOne} />
-  } else {
-    country = <Spinner />
-  }
 
+  /*          {countries ? <Home countries={countries} /> : <Spinner />} */
   return (
-    <div>
+    <>
       <Header />
-
-      {country}
-    </div>
+      <Switch>
+        <Route
+          exact
+          path='/'
+          render={(renderProps) =>
+            countries ? (
+              <Home countries={countries} {...renderProps} />
+            ) : (
+              <Spinner />
+            )
+          }
+        ></Route>
+        <Route
+          exact
+          path='/:name'
+          render={(renderProps) => <Chosen {...renderProps} />}
+        ></Route>
+      </Switch>
+    </>
   )
 }
 

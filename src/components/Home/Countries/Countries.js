@@ -7,7 +7,11 @@ const Countries = (props) => {
       <div className={styles.card__container}>
         <div className={styles.card__wrapper}>
           {props.countries.map((country) => (
-            <Country info={country} key={country.name} />
+            <Country
+              info={country}
+              key={country.name}
+              clicked={props.clicked}
+            />
           ))}
         </div>
       </div>

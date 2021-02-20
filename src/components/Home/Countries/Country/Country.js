@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./Country.module.css"
 const Country = (props) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={() => props.clicked(props.info.name)}>
       <div className={styles.card__img}>
         <img src={props.info.flag} alt='flag' className={styles.card__flag} />
       </div>
