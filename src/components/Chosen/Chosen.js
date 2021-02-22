@@ -3,91 +3,184 @@ import styles from "./Chosen.module.css"
 import Axios from "../../Utils/axios"
 import Spinner from "../UI/Spinner"
 import { Link } from "react-router-dom"
+
 const Chosen = (props) => {
-  const [chosenOne, setChoseOne] = useState()
+  const [country, setCountry] = useState()
+  const [route, setroute] = useState("")
+  //Handle going back
+
   useEffect(() => {
-    getOneCountry(props.match.params.name)
+    const pathname = props.history.location.pathname
+    let path
+    if (!pathname.includes("alpha")) {
+      path = pathname.slice(1)
+      getCountry(path)
+    } else {
+      path = pathname.slice(-3)
+      getBorder(path)
+    }
   }, [])
 
-  function getOneCountry(name) {
+  useEffect(() => {
+    const pathname = props.history.location.pathname
+    let path
+    if (!pathname.includes("alpha")) {
+      path = pathname.slice(1)
+      getCountry(path)
+    } else {
+      path = pathname.slice(-3)
+      getBorder(path)
+    }
+  }, [route])
+
+  //Refactor response from server
+  function refactorData(response) {
+    let refactoredData
+    console.log(response)
+    for (const key of response) {
+      refactoredData = key
+    }
+    for (const key in refactoredData) {
+      if (Array.isArray(refactoredData[key])) {
+        refactoredData[key] = { ...refactoredData[key] }
+      }
+    }
+
+    return refactoredData
+  }
+  /*
+  //handle new country route
+  const handleCountry = (name) => {
+    getCountry(name)
+  }
+  */
+
+  //handle country name route
+  function getCountry(name) {
     const axios = new Axios()
     axios.getOne(name).then((all) => {
-      //refactor data
-      let refactoredData
-      for (const key of all.data) {
-        refactoredData = key
-      }
-      for (const key in refactoredData) {
-        if (Array.isArray(refactoredData[key])) {
-          refactoredData[key] = { ...refactoredData[key] }
-        }
-      }
-
-      setChoseOne(refactoredData)
+      //refactored data
+      const refactored = refactorData(all.data)
+      setCountry(refactored)
     })
+  }
+  //handle country name route
+  function getBorder(name) {
+    const axios = new Axios()
+    axios.getAlpha(name).then((all) => {
+      //refactored data
+
+      const refactored = refactorData([all.data])
+      setCountry(refactored)
+    })
+  }
+
+  const handleNewRoute = () => {
+    setroute(props.history.location.pathname)
   }
   const handleGoBack = () => {
     props.history.goBack()
+    setroute(props.history.location.pathname)
   }
+
+  const arrayToObj = (identifier) => {
+    let aux = []
+
+    for (const key in country[identifier]) {
+      aux.push(country[identifier][key])
+    }
+
+    if (identifier === "borders") {
+      aux = aux.map((border) => (
+        <Link
+          to={`/alpha/${border}`}
+          key={border}
+          className={styles.chosen__link}
+          onClick={handleNewRoute}
+        >
+          {border}
+        </Link>
+      ))
+    } else {
+      aux = aux.map((item) => <span key={item}> {item.name}</span>)
+    }
+
+    return aux
+  }
+  let borders
+  let languages
+  if (country) {
+    borders = arrayToObj("borders")
+    languages = arrayToObj("languages")
+  }
+
+  /*
+  if (country) {
+    for (const key in country.borders) {
+      borders.push(country.borders[key])
+      languages.push(country.languages[key])
+    }
+    borders = borders.map((border) => (
+      <Link
+        to={`/alpha/${border}`}
+        key={border}
+        className={styles.chosen__link}
+      >
+        {border}
+      </Link>
+    ))
+  }
+  */
+
   return (
     <>
-      {chosenOne ? (
+      {country ? (
         <section className={styles.chosen}>
           <div className={styles.chosen__container}>
             <div className={styles.chosen__contBtn}>
-              <Link onClick={handleGoBack}> &larr; &nbsp; Back</Link>
+              <button onClick={handleGoBack}> &larr; &nbsp; Back</button>
             </div>
             <div className={styles.chosen__wrapper}>
               <div className={styles.chosen__image}>
-                <img src={chosenOne.flag} alt='chosen flag' />
+                <img src={country.flag} alt='chosen flag' />
               </div>
               <div className={styles.chosen__content}>
                 <div className={styles.chosen__containerOne}>
-                  <h2 className={styles.chosen__name}>{chosenOne.name}</h2>
+                  <h2 className={styles.chosen__name}>{country.name}</h2>
                   <p className={styles.chosen__dataText}>
-                    Native name: <span>{chosenOne.nativeName}</span>
+                    Native name: <span>{country.nativeName}</span>
                   </p>
                   <p className={styles.chosen__dataText}>
-                    Population: <span>{chosenOne.population}</span>
+                    Population: <span>{country.population}</span>
                   </p>
                   <p className={styles.chosen__dataText}>
-                    Region: <span>{chosenOne.region}</span>
+                    Region: <span>{country.region}</span>
                   </p>
                   <p className={styles.chosen__dataText}>
-                    Sub Region: <span>{chosenOne.subregion}</span>
+                    Sub Region: <span>{country.subregion}</span>
                   </p>
                   <p className={styles.chosen__dataText}>
-                    Capital: <span>{chosenOne.capital}</span>
+                    Capital: <span>{country.capital}</span>
                   </p>
                 </div>
                 <div className={styles.chosen__containerTwo}>
                   <p className={styles.chosen__dataText}>
                     Top level Domain:
-                    <span>{chosenOne.topLevelDomain[0]}</span>
+                    <span>{country.topLevelDomain[0]}</span>
                   </p>
                   <p className={styles.chosen__dataText}>
-                    Currencies: <span>{chosenOne.currencies[0].name}</span>
+                    Currencies: <span>{country.currencies[0].name}</span>
                   </p>
                   <p className={styles.chosen__dataText}>
-                    Languages: <span>{chosenOne.languages[0].name}</span>
-                    {/*<span> {chosenOne.languages[1].name}</span>
-                    <span> {chosenOne.languages[2].name}</span>*/}
+                    Languages: {languages}
+                    {/*<span>{country.languages[0].name}</span>*/}
+                    {/*<span> {country.languages[1].name}</span>
+                    <span> {country.languages[2].name}</span>*/}
                   </p>
                 </div>
                 <div className={styles.chosen__containerThree}>
                   <p className={styles.chosen__dataText}>Border Countries:</p>
-                  <div className={styles.chosen__links}>
-                    <a href='#' className={styles.chosen__link}>
-                      {chosenOne.borders[0]}
-                    </a>
-
-                    {/*<a href='#' className={styles.chosen__link}>
-                      {chosenOne.borders[1]}
-                    </a>
-                    <a href='#' className={styles.chosen__link}>
-      {chosenOne.borders[2]
-                    </a>}*/}
-                  </div>
+                  <div className={styles.chosen__links}>{borders}</div>
                 </div>
               </div>
             </div>

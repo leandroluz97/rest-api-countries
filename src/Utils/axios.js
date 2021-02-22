@@ -15,6 +15,9 @@ class Axios {
   getOne(name) {
     return this.instance.get(`/name/${name}`)
   }
+  getAlpha(name) {
+    return this.instance.get(`/alpha/${name}`)
+  }
 }
 
 export default Axios

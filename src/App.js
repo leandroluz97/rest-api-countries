@@ -8,8 +8,10 @@ import Header from "./components/Header/Header"
 import Home from "./components/Home/Home"
 import { Switch, Route } from "react-router-dom"
 
-const App = () => {
+const App = (props) => {
   const [countries, setCountries] = useState()
+  const [chosenOne, setChoseOne] = useState()
+  const [border, setBorder] = useState()
 
   //get all countries
   useEffect(() => {
@@ -22,17 +24,36 @@ const App = () => {
       setCountries(all.data)
     })
   }
+  /*
+  //Refactor response from server
+  function refactorData(response) {
+    let refactoredData
+    for (const key of response) {
+      refactoredData = key
+    }
+    for (const key in refactoredData) {
+      if (Array.isArray(refactoredData[key])) {
+        refactoredData[key] = { ...refactoredData[key] }
+      }
+    }
 
-  let allCountries = null
-  let country = null
-
-  if (countries) {
-    allCountries = <Home countries={countries} />
-  } else {
-    allCountries = <Spinner />
+    return refactoredData
+  }
+  //handle new country route
+  const handleCountry = (name) => {
+    getCountry(name)
   }
 
-  /*          {countries ? <Home countries={countries} /> : <Spinner />} */
+  //handle country name route
+  function getCountry(name) {
+    const axios = new Axios()
+    axios.getOne(name).then((all) => {
+      //refactored data
+      const refactored = refactorData(all.data)
+      setChoseOne(refactored)
+    })
+  }
+*/
   return (
     <>
       <Header />
@@ -51,7 +72,16 @@ const App = () => {
         <Route
           exact
           path='/:name'
-          render={(renderProps) => <Chosen {...renderProps} />}
+          render={(renderProps) => (
+            <Chosen {...renderProps} chosenOne={chosenOne} />
+          )}
+        ></Route>
+        <Route
+          exact
+          path='/alpha/:alpha'
+          render={(renderProps) => (
+            <Chosen {...renderProps} chosenOne={border} />
+          )}
         ></Route>
       </Switch>
     </>

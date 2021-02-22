@@ -109,7 +109,7 @@
   }
   .chosen__containerOne {
     margin-bottom: 5rem;
-    grid-column: 0/1;
+    grid-column: 1/2;
   }
   .chosen__containerTwo {
     margin-bottom: 0rem;
@@ -118,12 +118,10 @@
   }
   .chosen__containerThree {
     margin-bottom: 0rem;
-    grid-column: 0/3;
   }
   .chosen__content {
     display: grid;
-    grid-template-columns: 2;
-    grid-template-rows: 2;
+    grid-template-columns: 1fr 1fr;
     width: 45%;
   }
 }
