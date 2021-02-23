@@ -6,7 +6,8 @@ import { Link } from "react-router-dom"
 
 const Chosen = (props) => {
   const [country, setCountry] = useState()
-  const [route, setroute] = useState("")
+  const [border, setborder] = useState()
+
   //Handle going back
 
   useEffect(() => {
@@ -15,28 +16,13 @@ const Chosen = (props) => {
     if (!pathname.includes("alpha")) {
       path = pathname.slice(1)
       getCountry(path)
-    } else {
-      path = pathname.slice(-3)
-      getBorder(path)
     }
   }, [])
-
-  useEffect(() => {
-    const pathname = props.history.location.pathname
-    let path
-    if (!pathname.includes("alpha")) {
-      path = pathname.slice(1)
-      getCountry(path)
-    } else {
-      path = pathname.slice(-3)
-      getBorder(path)
-    }
-  }, [route])
 
   //Refactor response from server
   function refactorData(response) {
     let refactoredData
-    console.log(response)
+
     for (const key of response) {
       refactoredData = key
     }
@@ -75,12 +61,9 @@ const Chosen = (props) => {
     })
   }
 
-  const handleNewRoute = () => {
-    setroute(props.history.location.pathname)
-  }
+  const handleNewRoute = () => {}
   const handleGoBack = () => {
     props.history.goBack()
-    setroute(props.history.location.pathname)
   }
 
   const arrayToObj = (identifier) => {

@@ -7,9 +7,11 @@ import Spinner from "./components/UI/Spinner"
 import Header from "./components/Header/Header"
 import Home from "./components/Home/Home"
 import { Switch, Route } from "react-router-dom"
+import Search from "./components/Home/Search/Search"
 
 const App = (props) => {
-  const [countries, setCountries] = useState()
+  const [countries, setCountries] = useState([])
+  const [filtered, setFiltered] = useState("")
   const [chosenOne, setChoseOne] = useState()
   const [border, setBorder] = useState()
 
@@ -24,36 +26,19 @@ const App = (props) => {
       setCountries(all.data)
     })
   }
-  /*
-  //Refactor response from server
-  function refactorData(response) {
-    let refactoredData
-    for (const key of response) {
-      refactoredData = key
-    }
-    for (const key in refactoredData) {
-      if (Array.isArray(refactoredData[key])) {
-        refactoredData[key] = { ...refactoredData[key] }
-      }
-    }
 
-    return refactoredData
+  const handleSearch = (e) => {
+    setFiltered(e.target.value)
   }
-  //handle new country route
-  const handleCountry = (name) => {
-    getCountry(name)
+  let countryFiltered = [...countries]
+  if (countries) {
+    countryFiltered = countries.filter((cntry) =>
+      cntry.name.toLowerCase().includes(filtered.toLowerCase())
+    )
   }
 
-  //handle country name route
-  function getCountry(name) {
-    const axios = new Axios()
-    axios.getOne(name).then((all) => {
-      //refactored data
-      const refactored = refactorData(all.data)
-      setChoseOne(refactored)
-    })
-  }
-*/
+  console.log(countries)
+
   return (
     <>
       <Header />
@@ -62,8 +47,12 @@ const App = (props) => {
           exact
           path='/'
           render={(renderProps) =>
-            countries ? (
-              <Home countries={countries} {...renderProps} />
+            countries.length !== 0 ? (
+              <Home
+                countries={countryFiltered}
+                {...renderProps}
+                handleSearch={handleSearch}
+              />
             ) : (
               <Spinner />
             )
@@ -72,16 +61,11 @@ const App = (props) => {
         <Route
           exact
           path='/:name'
-          render={(renderProps) => (
-            <Chosen {...renderProps} chosenOne={chosenOne} />
-          )}
+          render={(renderProps) => <Chosen {...renderProps} />}
         ></Route>
         <Route
-          exact
           path='/alpha/:alpha'
-          render={(renderProps) => (
-            <Chosen {...renderProps} chosenOne={border} />
-          )}
+          render={(renderProps) => <Chosen {...renderProps} />}
         ></Route>
       </Switch>
     </>

@@ -9,7 +9,7 @@ const Home = (props) => {
   }
   return (
     <section className={styles.home}>
-      <Search />
+      <Search handleSearch={props.handleSearch} />
       <Countries countries={props.countries} clicked={handleRoute} />
     </section>
   )
