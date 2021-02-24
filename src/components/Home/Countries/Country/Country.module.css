@@ -4,6 +4,11 @@
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.034);
   margin: 1rem 0;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
 }
 .card__content {
   padding: 3rem 2rem;

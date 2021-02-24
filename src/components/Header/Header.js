@@ -1,19 +1,16 @@
 import React from "react"
 import styles from "./Header.module.css"
 import { VscColorMode } from "react-icons/vsc"
+import { Link } from "react-router-dom"
 
 const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.header__wrapper}>
-          <a href='#' className={styles.header__logo}>
+          <Link to='/' className={styles.header__logo}>
             Where in the world?
-          </a>
-          <div className={styles.header__darkmode}>
-            <VscColorMode size={20} />
-            <p className={styles.header__txt}>Dark Mode</p>
-          </div>
+          </Link>
         </div>
       </div>
     </header>

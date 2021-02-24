@@ -8,7 +8,9 @@ const Select = (props) => {
         className={styles.select}
         onChange={(e) => props.getAllRegion(e)}
       >
-        <option value='all'>Search by Region</option>
+        <option value='all' className={styles.option}>
+          Search by Region
+        </option>
         <option value='africa'>Africa</option>
         <option value='americas'>America</option>
         <option value='asia'>Asia</option>

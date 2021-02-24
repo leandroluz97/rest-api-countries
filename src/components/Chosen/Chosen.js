@@ -28,7 +28,6 @@ const Chosen = (props) => {
     if (pathname.includes("alpha")) {
       path = pathname.slice(-3)
       getBorder(path)
-      console.log("yesss")
     }
   }, [])
 
@@ -111,24 +110,6 @@ const Chosen = (props) => {
     borders = arrayToObj("borders")
     languages = arrayToObj("languages")
   }
-
-  /*
-  if (country) {
-    for (const key in country.borders) {
-      borders.push(country.borders[key])
-      languages.push(country.languages[key])
-    }
-    borders = borders.map((border) => (
-      <Link
-        to={`/alpha/${border}`}
-        key={border}
-        className={styles.chosen__link}
-      >
-        {border}
-      </Link>
-    ))
-  }
-  */
 
   return (
     <>

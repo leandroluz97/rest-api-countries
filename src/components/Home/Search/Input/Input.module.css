@@ -10,13 +10,16 @@
   border: none;
   outline: transparent;
   margin-left: 1rem;
-
   font-size: 1.6rem;
   width: 80%;
+  transform: translateY(-5px);
+}
+.input__input::placeholder {
+  color: rgba(0, 0, 0, 0.267);
 }
 @media (min-width: 768px) {
   .input {
-    padding: 2rem 3rem;
+    padding: 2rem 3rem 1.5rem 3rem;
     width: 50%;
     margin-bottom: 0rem;
   }
