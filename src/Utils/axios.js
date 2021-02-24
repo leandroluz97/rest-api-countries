@@ -18,6 +18,9 @@ class Axios {
   getAlpha(name) {
     return this.instance.get(`/alpha/${name}`)
   }
+  getRegion(region) {
+    return this.instance.get(`/region/${region}`)
+  }
 }
 
 export default Axios

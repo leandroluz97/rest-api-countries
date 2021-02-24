@@ -8,7 +8,7 @@ const Search = (props) => {
       <div className={styles.search__container}>
         <div className={styles.search__wrapper}>
           <Input handleSearch={props.handleSearch} />
-          <Select />
+          <Select getAllRegion={props.getAllRegion} />
         </div>
       </div>
     </div>

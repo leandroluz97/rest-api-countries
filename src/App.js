@@ -26,6 +26,22 @@ const App = (props) => {
       setCountries(all.data)
     })
   }
+  function getAllRegion(e) {
+    /*
+    if (e.target.value === "") {
+      return false
+    }
+*/
+    const axios = new Axios()
+    let value = e.target.value
+    if (value === "all") {
+      getAllCountry()
+    } else {
+      axios.getRegion(value).then((all) => {
+        setCountries(all.data)
+      })
+    }
+  }
 
   const handleSearch = (e) => {
     setFiltered(e.target.value)
@@ -36,8 +52,6 @@ const App = (props) => {
       cntry.name.toLowerCase().includes(filtered.toLowerCase())
     )
   }
-
-  console.log(countries)
 
   return (
     <>
@@ -52,6 +66,7 @@ const App = (props) => {
                 countries={countryFiltered}
                 {...renderProps}
                 handleSearch={handleSearch}
+                getAllRegion={getAllRegion}
               />
             ) : (
               <Spinner />

@@ -9,7 +9,10 @@ const Home = (props) => {
   }
   return (
     <section className={styles.home}>
-      <Search handleSearch={props.handleSearch} />
+      <Search
+        handleSearch={props.handleSearch}
+        getAllRegion={props.getAllRegion}
+      />
       <Countries countries={props.countries} clicked={handleRoute} />
     </section>
   )
