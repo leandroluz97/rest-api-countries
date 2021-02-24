@@ -8,14 +8,27 @@ const Chosen = (props) => {
   const [country, setCountry] = useState()
   const [border, setborder] = useState()
 
-  //Handle going back
-
+  //Chosen countries
   useEffect(() => {
     const pathname = props.history.location.pathname
     let path
     if (!pathname.includes("alpha")) {
       path = pathname.slice(1)
       getCountry(path)
+    }
+  }, [])
+
+  //handle border reload
+  useEffect(() => {
+    const pathname = props.history.location.pathname
+    let path = pathname.slice(-3)
+
+    setborder(path)
+
+    if (pathname.includes("alpha")) {
+      path = pathname.slice(-3)
+      getBorder(path)
+      console.log("yesss")
     }
   }, [])
 
@@ -61,9 +74,11 @@ const Chosen = (props) => {
     })
   }
 
-  const handleNewRoute = () => {}
+  const handleNewRoute = (route) => {
+    getBorder(route)
+  }
   const handleGoBack = () => {
-    props.history.goBack()
+    props.history.push("/")
   }
 
   const arrayToObj = (identifier) => {
@@ -74,12 +89,12 @@ const Chosen = (props) => {
     }
 
     if (identifier === "borders") {
-      aux = aux.map((border) => (
+      aux = aux.map((border, index) => (
         <Link
           to={`/alpha/${border}`}
-          key={border}
+          key={index}
           className={styles.chosen__link}
-          onClick={handleNewRoute}
+          onClick={() => handleNewRoute(border)}
         >
           {border}
         </Link>

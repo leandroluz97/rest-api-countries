@@ -80,7 +80,7 @@ const App = (props) => {
         ></Route>
         <Route
           path='/alpha/:alpha'
-          render={(renderProps) => <Chosen {...renderProps} />}
+          render={(renderProps) => <Chosen {...renderProps} teste='test' />}
         ></Route>
       </Switch>
     </>
