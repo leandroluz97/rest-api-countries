@@ -53,12 +53,25 @@ const Chosen = (props) => {
   }
   */
 
+  function population(all) {
+    let data = [...all]
+    data.forEach((country) => {
+      for (let key in country) {
+        if (key === "population") {
+          let valueNum = String(country[key])
+          country[key] = valueNum.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
+      }
+    })
+    return data
+  }
   //handle country name route
   function getCountry(name) {
     const axios = new Axios()
     axios.getOne(name).then((all) => {
       //refactored data
       const refactored = refactorData(all.data)
+
       setCountry(refactored)
     })
   }

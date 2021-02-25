@@ -12,6 +12,7 @@ const Home = (props) => {
       <Search
         handleSearch={props.handleSearch}
         getAllRegion={props.getAllRegion}
+        filtered={props.filtered}
       />
       <Countries countries={props.countries} clicked={handleRoute} />
     </section>

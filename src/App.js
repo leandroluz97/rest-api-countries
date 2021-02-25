@@ -23,7 +23,17 @@ const App = (props) => {
   function getAllCountry() {
     const axios = new Axios()
     axios.getAllCountries().then((all) => {
-      setCountries(all.data)
+      let data = [...all.data]
+      data.forEach((country) => {
+        for (let key in country) {
+          if (key === "population") {
+            let valueNum = String(country[key])
+            country[key] = valueNum.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+          }
+        }
+      })
+
+      setCountries(data)
     })
   }
   function getAllRegion(e) {
@@ -67,6 +77,7 @@ const App = (props) => {
                 {...renderProps}
                 handleSearch={handleSearch}
                 getAllRegion={getAllRegion}
+                filtered={filtered}
               />
             ) : (
               <Spinner />

@@ -12,6 +12,7 @@ const Input = (props) => {
         className={styles.input__input}
         placeholder='Search for a country'
         onChange={(e) => props.handleSearch(e)}
+        value={props.filtered}
       />
     </div>
   )
